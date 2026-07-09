@@ -1,10 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import logo from '@/assets/logo.png';
+
+console.log(logo);
 
 const links = [
   { to: '/', label: 'Home' },
-  { to: '/arabic', label: 'Arabic' },
+  { to: '/talim/tafsir', label: "Ta'lim Classes" },
+  { to: '/ITQARegistration/student', label: 'ITQA Registration' },
   { to: '/huffaaz-db', label: 'Huffaaz DB' },
+  { to: '/madrasatu-tahfiz', label: 'Madrasatu Tahfiz' },
+  { to: '/waqf', label: 'Waqf-e-Ardhi' },
   { to: '/resources', label: 'Resources' },
 ];
 
@@ -75,9 +81,11 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-md bg-emerald-700 flex items-center justify-center shadow-md text-white font-bold">
-              TU
-            </div>
+            <img
+              src={logo}
+              alt="Ta'limul Qur'an & Waqfe Ardhi Nigeria logo"
+              className="h-10 w-10 rounded-full object-contain"
+            />
             <div className="hidden sm:flex flex-col leading-tight">
               <span className="text-sm font-semibold text-emerald-900">Talim ul Quran</span>
               <span className="text-xs text-gray-500">Waqf Centre</span>
@@ -139,7 +147,11 @@ const Navbar = () => {
           <div className="px-5 pt-6 pb-5">
             <div className="flex items-center justify-between">
               <Link to="/" onClick={() => setOpen(false)} className="flex items-center gap-3">
-                <div className="h-9 w-9 rounded-md bg-emerald-700 flex items-center justify-center text-white font-bold">TU</div>
+                <img
+                  src={logo}
+                  alt="Ta'limul Qur'an & Waqfe Ardhi Nigeria logo"
+                  className="h-9 w-9 rounded-full object-contain"
+                />
                 <span className="text-sm font-semibold text-emerald-900">Talim ul Quran</span>
               </Link>
               <button

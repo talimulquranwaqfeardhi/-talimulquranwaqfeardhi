@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { BookOpenText, ChevronDown, Menu, X } from 'lucide-react';
+import { ChevronDown, Menu, X } from 'lucide-react';
+import logo from '@/assets/logo.png';
 
 const TALIM_ITEMS = [
   { label: "Tafsir al-Qur'an",   to: '/talim/tafsir'   },
@@ -15,7 +16,6 @@ const ITQA_ITEMS = [
 ];
 
 const SIMPLE_LINKS = [
-  { label: 'Arabic',            to: '/arabic'           },
   { label: 'Hufaaz DB',        to: '/huffaaz-db'        },
   { label: 'Madrasatu Tahfiz', to: '/madrasatu-tahfiz' },
   { label: 'Waqf-e-Ardhi',    to: '/waqf'             },
@@ -120,9 +120,11 @@ export default function Navbar() {
 
         {/* logo */}
         <Link to="/" className="flex shrink-0 items-center gap-2">
-          <span className="flex h-[34px] w-[34px] items-center justify-center rounded-lg bg-emerald-800">
-            <BookOpenText className="h-[17px] w-[17px] text-white" strokeWidth={2} />
-          </span>
+          <img
+            src={logo}
+            alt="Ta'limul Qur'an & Waqfe Ardhi Nigeria logo"
+            className="h-[34px] w-[34px] rounded-full object-contain"
+          />
           <span className="flex flex-col leading-none">
             <span className="text-[13px] font-bold tracking-tight text-gray-900">
               Ta'lim-ul-Qur'an

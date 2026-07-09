@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
 import {
-Mail,
-Phone,
-MapPin,
+  Mail,
+  Phone,
+  MapPin,
+  Globe,
 } from "lucide-react";
+import logo from '@/assets/logo.png';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -16,9 +18,11 @@ const Footer = () => {
           {/* Column 1: About Us */}
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <div className="h-10 w-10 rounded-lg bg-emerald-700 flex items-center justify-center text-white font-bold text-sm shadow-md">
-                TU
-              </div>
+              <img
+                src={logo}
+                alt="Ta'limul Qur'an & Waqfe Ardhi Nigeria logo"
+                className="h-10 w-10 rounded-full object-contain"
+              />
               <div className="flex flex-col leading-tight">
                 <span className="text-sm font-bold text-white">Talim ul Quran</span>
                 <span className="text-xs text-slate-400">Waqf Centre</span>
@@ -40,17 +44,12 @@ const Footer = () => {
             <h3 className="text-lg font-bold text-white mb-6">Quick Links</h3>
             <ul className="space-y-3">
               <li>
-                <Link to="/talim-classes" className="text-sm text-slate-400 hover:text-white transition">
+                <Link to="/talim/tafsir" className="text-sm text-slate-400 hover:text-white transition">
                   Ta'lim Classes
                 </Link>
               </li>
               <li>
-                <Link to="/arabic" className="text-sm text-slate-400 hover:text-white transition">
-                  Arabic Programme
-                </Link>
-              </li>
-              <li>
-                <Link to="/itqa/student-registration" className="text-sm text-slate-400 hover:text-white transition">
+                <Link to="/ITQARegistration/student" className="text-sm text-slate-400 hover:text-white transition">
                   ITQA Registration
                 </Link>
               </li>
@@ -62,6 +61,11 @@ const Footer = () => {
               <li>
                 <Link to="/madrasatu-tahfiz" className="text-sm text-slate-400 hover:text-white transition">
                   Madrasas
+                </Link>
+              </li>
+              <li>
+                <Link to="/waqf" className="text-sm text-slate-400 hover:text-white transition">
+                  Waqf-e-Ardhi
                 </Link>
               </li>
               <li>
@@ -104,34 +108,35 @@ const Footer = () => {
             <p className="text-sm text-slate-400 mb-6">
               Connect with us on social media for updates and announcements.
             </p>
+            {/* TODO: href="#" placeholders — swap in your real social URLs when ready */}
             <div className="flex gap-4">
               <a
                 href="#"
                 aria-label="Facebook"
                 className="w-10 h-10 bg-emerald-700 hover:bg-emerald-800 rounded-lg flex items-center justify-center text-white transition"
               >
-                
+                <Globe className="h-5 w-5" />
               </a>
               <a
                 href="#"
                 aria-label="Twitter"
                 className="w-10 h-10 bg-emerald-700 hover:bg-emerald-800 rounded-lg flex items-center justify-center text-white transition"
               >
-                
+                <Mail className="h-5 w-5" />
               </a>
               <a
                 href="#"
                 aria-label="Instagram"
                 className="w-10 h-10 bg-emerald-700 hover:bg-emerald-800 rounded-lg flex items-center justify-center text-white transition"
               >
-               
+                <Phone className="h-5 w-5" />
               </a>
               <a
                 href="#"
                 aria-label="LinkedIn"
                 className="w-10 h-10 bg-emerald-700 hover:bg-emerald-800 rounded-lg flex items-center justify-center text-white transition"
               >
-                
+                <MapPin className="h-5 w-5" />
               </a>
             </div>
           </div>
@@ -163,4 +168,3 @@ const Footer = () => {
 };
 
 export default Footer;
-

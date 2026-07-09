@@ -13,14 +13,14 @@ const CARDS = [
     title: 'ITQA Accreditation',
     desc:  'Register as a certified teacher or student through our streamlined accreditation process.',
     cta:   'Register Now',
-    to:    '/ITQARegistration',
+    to:    '/ITQARegistration/student',
   },
   {
     icon: BookOpenText,
     title: "Ta'lim Classes",
     desc:  'Join Tafsir, Tajweed, and Tarjumat classes with experienced instructors across Nigeria.',
     cta:   'Find Classes',
-    to:    '/talim',
+    to:    '/talim/tafsir',
   },
   {
     icon: MapPin,
@@ -51,7 +51,7 @@ export default function Hero() {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage:
-              "url('https://images.unsplash.com/photo-1564769662533-4f00a87b4056?w=1800&q=80')",
+              "url('https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=1800&q=80')",
           }}
         />
 
@@ -95,13 +95,13 @@ export default function Hero() {
             {/* buttons */}
             <div className="mt-10 flex flex-wrap gap-3">
               <Link
-                to="/ITQARegistration"
+                to="/ITQARegistration/centres"
                 className="inline-flex items-center rounded-lg bg-amber-400 px-7 py-3.5 text-sm font-bold text-gray-900 shadow-lg shadow-amber-500/25 transition-all duration-300 hover:-translate-y-0.5 hover:bg-amber-300 hover:shadow-xl hover:shadow-amber-400/30 active:translate-y-0"
               >
                 Join ITQA
               </Link>
               <Link
-                to="/talim"
+                to="/talim/tafsir"
                 className="inline-flex items-center rounded-lg border border-white/20 bg-white/10 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-white/35 hover:bg-white/[0.18] active:translate-y-0"
               >
                 Find a Ta'lim Class

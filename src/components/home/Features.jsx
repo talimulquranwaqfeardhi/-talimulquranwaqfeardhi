@@ -35,7 +35,7 @@ const Features = () => {
           <FeatureCard icon={<Download className="h-6 w-6" />} title="Ta'lim Classes" description="Find and join local Ta'lim classes." to="/talim/tafsir" />
           <FeatureCard icon={<FileText className="h-6 w-6" />} title="ITQA Registration" description="Register for ITQA student programs." to="/ITQARegistration/student" />
           <FeatureCard icon={<Play className="h-6 w-6" />} title="Hufaaz Database" description="Browse the Hufaaz database and recordings." to="/huffaaz-db" />
-          <FeatureCard icon={<BookOpen className="h-6 w-6" />} title="Waqf-e-Ardhi" description="Learn about our Waqf land initiatives." to="/waqf-e-ardhi" />
+          <FeatureCard icon={<BookOpen className="h-6 w-6" />} title="Waqf-e-Ardhi" description="Learn about our Waqf land initiatives." to="/waqf" />
         </div>
       </div>
     </section>

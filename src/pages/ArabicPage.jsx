@@ -290,7 +290,7 @@ export default function ArabicPage() {
             <span className="text-emerald-600">/</span>
             <span className="text-white">Arabic Programme</span>
           </div> */}
-
+          
           <div className="max-w-2xl">
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-amber-400/25 bg-amber-400/10 px-4 py-1.5">
               <Languages className="h-3.5 w-3.5 text-amber-300" />

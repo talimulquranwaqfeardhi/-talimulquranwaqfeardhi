@@ -14,10 +14,12 @@ const Footer = () => {
         <div>
           <h4 className="font-semibold text-white mb-3">Quick Links</h4>
           <ul className="space-y-3 text-sm text-slate-300">
-            <li><Link to="/talim-classes" className="transition hover:text-white">Ta'lim Classes</Link></li>
-            <li><Link to="/itqa/student-registration" className="transition hover:text-white">ITQA Registration</Link></li>
+            <li><Link to="/talim/tafsir" className="transition hover:text-white">Ta'lim Classes</Link></li>
+            <li><Link to="/ITQARegistration/student" className="transition hover:text-white">ITQA Registration</Link></li>
             <li><Link to="/huffaaz-db" className="transition hover:text-white">Hufaaz DB</Link></li>
-            <li><Link to="/waqf-e-ardhi" className="transition hover:text-white">Waqf-e-Ardhi</Link></li>
+            <li><Link to="/madrasatu-tahfiz" className="transition hover:text-white">Madrasatu Tahfiz</Link></li>
+            <li><Link to="/waqf" className="transition hover:text-white">Waqf-e-Ardhi</Link></li>
+            <li><Link to="/resources" className="transition hover:text-white">Resources</Link></li>
           </ul>
         </div>
 
