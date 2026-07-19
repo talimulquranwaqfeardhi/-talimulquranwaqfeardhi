@@ -278,7 +278,7 @@ export default function HuffaazDBPage() {
           {/* breadcrumb */}
           <div className="mb-6 flex items-center gap-2 text-xs font-medium text-emerald-300">
             <Link to="/" className="transition-colors hover:text-amber-300"></Link>
-            <span className="text-emerald-600">/</span>
+            <span className="text-emerald-600"></span>
             <span className="text-white"></span>
           </div>
 

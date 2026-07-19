@@ -128,11 +128,11 @@ export default function TafsirPage() {
         <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
           {/* breadcrumb */}
           <div className="mb-6 flex items-center gap-2 text-xs font-medium text-emerald-300">
-            <Link to="/" className="transition-colors hover:text-amber-300">Home</Link>
-            <span className="text-emerald-600">/</span>
-            <Link to="/talim" className="transition-colors hover:text-amber-300">Ta'lim Classes</Link>
-            <span className="text-emerald-600">/</span>
-            <span className="text-white">Tafsir al-Qur'an</span>
+            <Link to="/" className="transition-colors hover:text-amber-300"></Link>
+            <span className="text-emerald-600"></span>
+            <Link to="/talim" className="transition-colors hover:text-amber-300"></Link>
+            <span className="text-emerald-600"></span>
+            <span className="text-white"></span>
           </div>
 
           <div className="max-w-2xl">
