@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import heroImage from '@/assets/background-image.jpeg';
 import {
   Languages,
   ArrowRight,
@@ -110,10 +111,13 @@ export default function TarjumatPage() {
     <div className="bg-white">
 
       {/* ══════════════════ HERO BANNER ══════════════════ */}
-      <section className="relative overflow-hidden bg-emerald-950">
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-800" />
+      <section
+        className="relative overflow-hidden bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${heroImage})` }}
+      >
+        <div className="absolute inset-0 bg-black/65"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-emerald-950/85 via-emerald-900/60 to-emerald-800/35" />
 
-        {/* decorative rings */}
         <div className="pointer-events-none absolute -right-40 -top-40 h-[520px] w-[520px] rounded-full border border-white/[0.04]" />
         <div className="pointer-events-none absolute -right-20 -top-20 h-[360px] w-[360px] rounded-full border border-white/[0.04]" />
         <div className="pointer-events-none absolute left-1/3 top-0 h-72 w-72 -translate-y-1/3 rounded-full bg-amber-500/10 blur-3xl" />
@@ -121,14 +125,14 @@ export default function TarjumatPage() {
           ر
         </span>
 
-        <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
           {/* breadcrumb */}
           <div className="mb-6 flex items-center gap-2 text-xs font-medium text-emerald-300">
-            {/* <Link to="/" className="transition-colors hover:text-amber-300">Home</Link>
+            <Link to="/" className="transition-colors hover:text-amber-300">Home</Link>
             <span className="text-emerald-600">/</span>
             <Link to="/talim" className="transition-colors hover:text-amber-300">Ta'lim Classes</Link>
             <span className="text-emerald-600">/</span>
-            <span className="text-white">Tarjumat al-Qur'an</span> */}
+            <span className="text-white">Tarjumat al-Qur'an</span>
           </div>
 
           <div className="max-w-2xl">
@@ -149,13 +153,15 @@ export default function TarjumatPage() {
             </p>
 
             <div className="mt-9 flex flex-wrap gap-3">
-              <Link
-                to="/ITQARegistration"
+              <a
+                href="https://www.itqa.org.uk/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group inline-flex items-center gap-2 rounded-xl bg-amber-400 px-7 py-3.5 text-sm font-bold text-emerald-950 shadow-lg shadow-amber-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-amber-300 hover:shadow-xl hover:shadow-amber-400/30"
               >
                 Register for This Class
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </Link>
+              </a>
               <Link
                 to="/talim"
                 className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-white/35 hover:bg-white/[0.18]"
@@ -246,13 +252,15 @@ export default function TarjumatPage() {
                     </span>
                   </div>
 
-                  <Link
-                    to="/ITQARegistration"
+                  <a
+                    href="https://www.itqa.org.uk/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-700 px-5 py-3 text-sm font-bold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-emerald-800 hover:shadow-md"
                   >
                     Register Now
                     <ArrowRight className="h-4 w-4" />
-                  </Link>
+                  </a>
                 </div>
               </div>
             </div>
@@ -352,13 +360,15 @@ export default function TarjumatPage() {
               Register today and join students building a direct, personal understanding of
               the Qur'an — free of charge, every week.
             </p>
-            <Link
-              to="/ITQARegistration"
+            <a
+              href="https://www.itqa.org.uk/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group mt-8 inline-flex items-center gap-2 rounded-xl bg-amber-400 px-7 py-3.5 text-sm font-extrabold text-emerald-950 shadow-lg shadow-amber-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-amber-300 hover:shadow-xl hover:shadow-amber-400/30"
             >
               Register for This Class
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
+            </a>
           </div>
         </div>
       </section>

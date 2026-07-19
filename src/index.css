@@ -1,8 +1,19 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 
 /* Global styles */
 * {
   box-sizing: border-box;
+}
+
+:root {
+  color-scheme: light;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  text-rendering: optimizeLegibility;
+  font-synthesis: none;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 html,
@@ -14,9 +25,8 @@ body,
 }
 
 body {
-  font-family: Inter, sans-serif;
-  background: #ffffff;
-  color: #111827;
+  background: #f8fafc;
+  color: #0f172a;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -24,6 +34,15 @@ body {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid rgba(16, 185, 129, 0.9);
+  outline-offset: 3px;
 }
 
 img {
@@ -36,4 +55,159 @@ input,
 textarea,
 select {
   font: inherit;
+}
+
+a,
+button,
+input,
+textarea,
+select {
+  transition: color 220ms ease-out,
+    background-color 220ms ease-out,
+    border-color 220ms ease-out,
+    box-shadow 220ms ease-out,
+    transform 220ms ease-out;
+  will-change: transform, box-shadow, color, background-color;
+}
+
+@layer utilities {
+  .soft-hover-lift {
+    transition: transform 220ms ease-out, box-shadow 220ms ease-out;
+  }
+
+  .soft-hover-lift:hover {
+    transform: translateY(-2px);
+  }
+
+  .soft-hover-glow:hover {
+    box-shadow: 0 22px 48px -28px rgba(15, 23, 42, 0.18);
+  }
+
+  .shadow-soft {
+    box-shadow: 0 18px 36px -24px rgba(15, 23, 42, 0.12),
+      0 8px 18px -18px rgba(15, 23, 42, 0.08);
+  }
+
+  .shadow-card {
+    box-shadow: 0 22px 46px -26px rgba(15, 23, 42, 0.12),
+      0 10px 22px -20px rgba(15, 23, 42, 0.08);
+  }
+
+  .shadow-button {
+    box-shadow: 0 10px 18px -10px rgba(15, 23, 42, 0.12),
+      0 6px 12px -10px rgba(15, 23, 42, 0.06);
+  }
+
+  .shadow-elevated {
+    box-shadow: 0 28px 70px -36px rgba(15, 23, 42, 0.14),
+      0 16px 34px -30px rgba(15, 23, 42, 0.08);
+  }
+
+  .shadow-panel {
+    box-shadow: 0 20px 40px -28px rgba(15, 23, 42, 0.12),
+      0 8px 18px -18px rgba(15, 23, 42, 0.06);
+  }
+
+  .glass-panel {
+    background-color: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .glass-panel-dark {
+    background-color: rgba(15, 23, 42, 0.80);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .hero-backdrop {
+    background-image:
+      radial-gradient(circle at 10% 20%, rgba(236, 201, 75, 0.16), transparent 26%),
+      radial-gradient(circle at 85% 10%, rgba(16, 185, 129, 0.14), transparent 28%),
+      radial-gradient(circle at 20% 80%, rgba(56, 189, 248, 0.12), transparent 30%);
+  }
+
+  .hero-spotlight {
+    background: rgba(255, 255, 255, 0.08);
+    filter: blur(34px);
+  }
+
+  .hero-cta-soft:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 42px -18px rgba(15, 23, 42, 0.14),
+      0 10px 24px -20px rgba(15, 23, 42, 0.08);
+  }
+}
+
+.page-transition {
+  animation: fadeInUp 360ms ease-out both;
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  will-change: opacity, transform;
+}
+
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 420ms ease-out, transform 420ms ease-out;
+}
+
+.fade-item {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 420ms ease-out both;
+}
+
+.animate-float-slow {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatSlow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition,
+  .fade-item,
+  [data-reveal],
+  .animate-float-slow,
+  button,
+  a,
+  input,
+  textarea,
+  select {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+::selection {
+  background: rgba(236, 201, 75, 0.22);
+  color: #111827;
 }

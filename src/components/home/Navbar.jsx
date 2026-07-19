@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '@/assets/logo.png';
 
@@ -7,7 +7,6 @@ console.log(logo);
 const links = [
   { to: '/', label: 'Home' },
   { to: '/talim/tafsir', label: "Ta'lim Classes" },
-  { to: '/ITQARegistration/student', label: 'ITQA Registration' },
   { to: '/huffaaz-db', label: 'Huffaaz DB' },
   { to: '/madrasatu-tahfiz', label: 'Madrasatu Tahfiz' },
   { to: '/waqf', label: 'Waqf-e-Ardhi' },
@@ -40,8 +39,12 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    setOpen(false);
-  }, [location.pathname]);
+    if (open) {
+      // The menu should close when the route changes.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setOpen(false);
+    }
+  }, [location.pathname, open]);
 
   useEffect(() => {
     const handleClick = (event) => {
@@ -74,7 +77,7 @@ const Navbar = () => {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled ? 'backdrop-blur-md bg-[#071312]/95 border-b border-slate-800 shadow-[0_20px_60px_-45px_rgba(0,0,0,0.7)]' : 'bg-transparent'
+        scrolled ? 'backdrop-blur-md bg-[#071312]/95 border-b border-slate-800 shadow-soft' : 'bg-transparent'
       }`}
       role="banner"
     >

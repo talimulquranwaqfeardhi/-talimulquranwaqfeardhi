@@ -6,16 +6,13 @@ import { Toaster } from '@/components/ui/toaster';
 import MainLayout from '@/layouts/MainLayout';
 
 import HomePage from '@/pages/HomePage';
+import AboutPage from '@/pages/AboutPage';
 import TafsirPage from '@/pages/talim/TafsirPage';
 import TajweedPage from '@/pages/talim/TajweedPage';
 import TarjumatPage from '@/pages/talim/TarjumatPage';
 import ArabicPage from '@/pages/ArabicPage';
 import WaqfPage from '@/pages/WaqfPage';
 import ResourcesPage from '@/pages/ResourcesPage';
-
-import TeacherRegistrationPage from '@/pages/itqa/TeacherRegistrationPage';
-import StudentRegistrationPage from '@/pages/itqa/StudentRegistrationPage';
-import CentreLocatorPage from '@/pages/itqa/CentreLocatorPage';
 
 import HuffaazDBPage from '@/pages/HuffaazDBPage';
 import MadrasasPage from '@/pages/MadrasasPage';
@@ -29,6 +26,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route index element={<HomePage />} />
+            <Route path="about" element={<AboutPage />} />
 
             {/* Ta'lim Classes */}
             <Route path="talim">
@@ -38,13 +36,6 @@ function App() {
               
             </Route>
             <Route path="huffaaz-db" element={<HuffaazDBPage />} />
-            {/* ITQA Registration */}
-            <Route path="ITQARegistration">
-              <Route path="teacher" element={<TeacherRegistrationPage />} />
-              <Route path="student" element={<StudentRegistrationPage />} />
-              <Route path="centres" element={<CentreLocatorPage />} />
-            </Route>
-
             <Route path="arabic" element={<ArabicPage />} />
             <Route path="huffaaz-db" element={<HuffaazDBPage />} />
             <Route path="madrasatu-tahfiz" element={<MadrasasPage />} />

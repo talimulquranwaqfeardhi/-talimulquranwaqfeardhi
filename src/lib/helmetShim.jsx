@@ -1,7 +1,7 @@
-import React from 'react';
+import { createElement, Fragment } from 'react';
 
 export const HelmetProvider = ({ children }) => {
-  return React.createElement(React.Fragment, null, children);
+  return createElement(Fragment, null, children);
 };
 
 export const Helmet = () => null;

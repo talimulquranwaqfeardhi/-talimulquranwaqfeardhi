@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import {
   Languages,
   ArrowRight,
@@ -273,13 +272,14 @@ export default function ArabicPage() {
     <div className="bg-white">
 
       {/* ══════════════════ HERO BANNER ══════════════════ */}
-      <section className="relative overflow-hidden bg-emerald-950">
+      <section className="relative overflow-hidden bg-emerald-950 hero-backdrop">
         <div className="absolute inset-0 bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-800" />
+        <div className="pointer-events-none hidden md:block absolute left-2/3 top-12 h-72 w-72 lg:h-96 lg:w-96 rounded-full hero-spotlight opacity-70" />
 
-        <div className="pointer-events-none absolute -right-40 -top-40 h-[520px] w-[520px] rounded-full border border-white/[0.04]" />
-        <div className="pointer-events-none absolute -right-20 -top-20 h-[360px] w-[360px] rounded-full border border-white/[0.04]" />
+        <div className="pointer-events-none hidden md:block absolute -right-40 -top-40 h-[320px] w-[320px] lg:h-[520px] lg:w-[520px] rounded-full border border-white/[0.04]" />
+        <div className="pointer-events-none hidden md:block absolute -right-20 -top-20 h-[220px] w-[220px] lg:h-[360px] lg:w-[360px] rounded-full border border-white/[0.04]" />
         <div className="pointer-events-none absolute left-1/3 top-0 h-72 w-72 -translate-y-1/3 rounded-full bg-amber-500/10 blur-3xl" />
-        <span className="pointer-events-none absolute inset-0 flex items-center justify-end pr-8 text-[18rem] font-black leading-none text-white/[0.025] select-none">
+        <span className="pointer-events-none hidden lg:flex absolute inset-0 items-center justify-end pr-8 text-[18rem] font-black leading-none text-white/[0.025] select-none">
           ع
         </span>
 
@@ -310,19 +310,23 @@ export default function ArabicPage() {
             </p>
 
             <div className="mt-9 flex flex-wrap gap-3">
-              <Link
-                to="/ITQARegistration/student"
-                className="group inline-flex items-center gap-2 rounded-xl bg-amber-400 px-7 py-3.5 text-sm font-bold text-emerald-950 shadow-lg shadow-amber-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-amber-300 hover:shadow-xl hover:shadow-amber-400/30"
+              <a
+                href="https://www.itqa.org.uk/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2 rounded-xl bg-amber-400 px-7 py-3.5 text-sm font-bold text-emerald-950 shadow-lg shadow-amber-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-amber-300 hover:shadow-xl hover:shadow-amber-400/30 hero-cta-soft"
               >
                 Enrol Now
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </Link>
-              <Link
-                to="/ITQARegistration/centres"
+              </a>
+              <a
+                href="https://www.itqa.org.uk/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-white/35 hover:bg-white/[0.18]"
               >
                 Find a Centre
-              </Link>
+              </a>
             </div>
           </div>
         </div>
@@ -640,19 +644,23 @@ export default function ArabicPage() {
                 </p>
               </div>
               <div className="flex shrink-0 flex-wrap gap-3">
-                <Link
-                  to="/ITQARegistration/student"
+                <a
+                  href="https://www.itqa.org.uk/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group inline-flex items-center gap-2 rounded-xl bg-amber-400 px-7 py-3.5 text-sm font-extrabold text-emerald-950 shadow-lg shadow-amber-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-amber-300 hover:shadow-xl hover:shadow-amber-400/30"
                 >
                   Enrol as a Student
                   <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </Link>
-                <Link
-                  to="/ITQARegistration/centres"
+                </a>
+                <a
+                  href="https://www.itqa.org.uk/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-white/35 hover:bg-white/[0.18]"
                 >
                   Find a Centre
-                </Link>
+                </a>
               </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
-// HuffaazDBPage.jsx — breadcrumb and Hero CTA buttons restored
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import heroImage from '@/assets/background-image.jpeg';
 import {
   Search,
   Filter,
@@ -260,8 +260,12 @@ export default function HuffaazDBPage() {
     <div className="bg-white">
 
       {/* ══════════════════ HERO BANNER ══════════════════ */}
-      <section className="relative overflow-hidden bg-emerald-950">
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-800" />
+      <section
+        className="relative overflow-hidden bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${heroImage})` }}
+      >
+        <div className="absolute inset-0 bg-black/65"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-emerald-950/85 via-emerald-900/60 to-emerald-800/35" />
 
         <div className="pointer-events-none absolute -right-40 -top-40 h-[520px] w-[520px] rounded-full border border-white/[0.04]" />
         <div className="pointer-events-none absolute -right-20 -top-20 h-[360px] w-[360px] rounded-full border border-white/[0.04]" />
@@ -270,13 +274,13 @@ export default function HuffaazDBPage() {
           ح
         </span>
 
-        <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
           {/* breadcrumb */}
-          {/* <div className="mb-6 flex items-center gap-2 text-xs font-medium text-emerald-300">
-            <Link to="/" className="transition-colors hover:text-amber-300">Home</Link>
+          <div className="mb-6 flex items-center gap-2 text-xs font-medium text-emerald-300">
+            <Link to="/" className="transition-colors hover:text-amber-300"></Link>
             <span className="text-emerald-600">/</span>
-            <span className="text-white">Huffaaz Database</span>
-          </div> */}
+            <span className="text-white"></span>
+          </div>
 
           <div className="max-w-2xl">
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-amber-400/25 bg-amber-400/10 px-4 py-1.5">
@@ -297,13 +301,20 @@ export default function HuffaazDBPage() {
             </p>
 
             <div className="mt-9 flex flex-wrap gap-3">
-              
-            
-                
-              
-                
-              
-              
+              <a
+                href="#search"
+                className="group inline-flex items-center gap-2 rounded-xl bg-amber-400 px-7 py-3.5 text-sm font-bold text-emerald-950 shadow-lg shadow-amber-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-amber-300 hover:shadow-xl hover:shadow-amber-400/30"
+              >
+                Search Huffaaz
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </a>
+              <a
+                href="#join"
+                className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-white/35 hover:bg-white/[0.18]"
+              >
+                <UserPlus className="h-4 w-4" />
+                Become Listed
+              </a>
             </div>
           </div>
         </div>

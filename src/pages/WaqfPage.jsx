@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import heroImage from '@/assets/background-image.jpeg';
 import {
   Landmark,
   ArrowRight,
@@ -240,8 +241,12 @@ export default function WaqfPage() {
     <div className="bg-white">
 
       {/* ══════════════════ HERO BANNER ══════════════════ */}
-      <section className="relative overflow-hidden bg-emerald-950">
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-800" />
+      <section
+        className="relative overflow-hidden bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${heroImage})` }}
+      >
+        <div className="absolute inset-0 bg-black/65"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-emerald-950/85 via-emerald-900/60 to-emerald-800/35" />
 
         <div className="pointer-events-none absolute -right-40 -top-40 h-[520px] w-[520px] rounded-full border border-white/[0.04]" />
         <div className="pointer-events-none absolute -right-20 -top-20 h-[360px] w-[360px] rounded-full border border-white/[0.04]" />
@@ -250,11 +255,11 @@ export default function WaqfPage() {
           و
         </span>
 
-        <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
           <div className="mb-6 flex items-center gap-2 text-xs font-medium text-emerald-300">
-            {/* <Link to="/" className="transition-colors hover:text-amber-300">Home</Link>
+            <Link to="/" className="transition-colors hover:text-amber-300"></Link>
             <span className="text-emerald-600">/</span>
-            <span className="text-white">Waqf-e-Ardhi</span> */}
+            <span className="text-white"></span>
           </div>
 
           <div className="max-w-2xl">

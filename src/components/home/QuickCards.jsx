@@ -74,7 +74,7 @@ const CARDS = [
 
 const accentMap = {
   emerald: {
-    iconBg: 'bg-emerald-700',
+    iconBg: 'bg-gradient-to-br from-emerald-600 to-emerald-700',
     iconText: 'text-white',
     badge: 'bg-emerald-50 text-emerald-700 border-emerald-100',
     cta: 'text-emerald-700 hover:text-emerald-900',
@@ -82,7 +82,7 @@ const accentMap = {
     hover: 'hover:border-emerald-200 hover:shadow-emerald-100/60',
   },
   amber: {
-    iconBg: 'bg-amber-400',
+    iconBg: 'bg-gradient-to-br from-amber-400 to-amber-500',
     iconText: 'text-emerald-950',
     badge: 'bg-amber-50 text-amber-700 border-amber-100',
     cta: 'text-amber-600 hover:text-amber-800',
@@ -93,7 +93,7 @@ const accentMap = {
 
 export default function QuickCards() {
   return (
-    <section className="bg-gray-50/70 py-24">
+    <section className="bg-gradient-to-br from-slate-50 via-white to-emerald-50/70 py-24" data-reveal>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <div className="mb-14 text-center">
@@ -120,7 +120,7 @@ export default function QuickCards() {
               <Link
                 key={title}
                 to={to}
-                className={`group relative flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${a.hover}`}
+                className={`group relative flex flex-col overflow-hidden rounded-2xl glass-panel border-gray-200/70 shadow-card transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-elevated ${a.hover}`}
               >
                 {/* Top colour bar */}
                 <div className={`h-1 w-full ${a.bar}`} />
@@ -129,7 +129,7 @@ export default function QuickCards() {
                   {/* Icon + badge row */}
                   <div className="mb-5 flex items-start justify-between">
                     <div
-                      className={`flex h-12 w-12 items-center justify-center rounded-xl ${a.iconBg} shadow-sm transition-transform duration-300 group-hover:scale-105`}
+                      className={`flex h-12 w-12 items-center justify-center rounded-xl ${a.iconBg} shadow-soft transition duration-300 ease-out group-hover:scale-105 group-hover:shadow-card animate-float-slow`}
                     >
                       <Icon className={`h-6 w-6 ${a.iconText}`} strokeWidth={2} />
                     </div>

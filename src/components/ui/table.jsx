@@ -1,4 +1,3 @@
-import React from 'react';
 
 export const Table = ({ children }) => <table>{children}</table>;
 export const TableHeader = ({ children }) => <thead>{children}</thead>;

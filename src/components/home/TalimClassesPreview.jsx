@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import {
   BookOpenText,
   Calendar,
-  Clock,
   Video,
   ArrowRight,
   Radio,
@@ -81,7 +80,7 @@ function LiveBadge() {
 
 export default function TalimClassesPreview() {
   return (
-    <section className="bg-white py-24">
+    <section className="bg-white py-24" data-reveal>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <div className="mb-14 flex flex-col items-center text-center">
@@ -124,7 +123,7 @@ export default function TalimClassesPreview() {
                   {/* Icon + title */}
                   <div className="mb-3 flex items-center gap-3">
                     <div
-                      className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${a.iconBg} shadow-sm transition-transform duration-300 group-hover:scale-105`}
+                      className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${a.iconBg} shadow-sm transition-transform duration-300 group-hover:scale-105 animate-float-slow`}
                     >
                       <BookOpenText className="h-5 w-5 text-white" strokeWidth={2} />
                     </div>

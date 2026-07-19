@@ -1,7 +1,5 @@
-import React from 'react';
-
 const Icon = ({ name, ...props }) => (
-  <span aria-hidden="true" {...props} style={{display:'inline-block'}}>{name}</span>
+  <span aria-hidden="true" {...props} style={{ display: 'inline-block' }}>{name}</span>
 );
 
 export const Download = (props) => <Icon name="download" {...props} />;

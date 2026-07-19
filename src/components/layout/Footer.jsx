@@ -11,9 +11,9 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-slate-900 text-slate-300">
+    <footer className="bg-slate-900/95 backdrop-blur-sm text-slate-300">
       {/* Main Footer */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 glass-panel-dark shadow-card rounded-[2rem]">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Column 1: About Us */}
           <div>
@@ -44,32 +44,32 @@ const Footer = () => {
             <h3 className="text-lg font-bold text-white mb-6">Quick Links</h3>
             <ul className="space-y-3">
               <li>
-                <Link to="/talim/tafsir" className="text-sm text-slate-400 hover:text-white transition">
+                <Link to="/talim/tafsir" className="text-sm text-slate-400 transition duration-200 ease-out hover:text-white hover:-translate-y-0.5 hover:underline hover:underline-offset-4">
                   Ta'lim Classes
                 </Link>
               </li>
               <li>
-                <Link to="/ITQARegistration/student" className="text-sm text-slate-400 hover:text-white transition">
+                <a href="https://www.itqa.org.uk/" target="_blank" rel="noopener noreferrer" className="text-sm text-slate-400 transition duration-200 ease-out hover:text-white hover:-translate-y-0.5 hover:underline hover:underline-offset-4">
                   ITQA Registration
-                </Link>
+                </a>
               </li>
               <li>
-                <Link to="/huffaaz-db" className="text-sm text-slate-400 hover:text-white transition">
+                <Link to="/huffaaz-db" className="text-sm text-slate-400 transition duration-200 ease-out hover:text-white hover:-translate-y-0.5 hover:underline hover:underline-offset-4">
                   Hufaaz Database
                 </Link>
               </li>
               <li>
-                <Link to="/madrasatu-tahfiz" className="text-sm text-slate-400 hover:text-white transition">
+                <Link to="/madrasatu-tahfiz" className="text-sm text-slate-400 transition duration-200 ease-out hover:text-white hover:-translate-y-0.5 hover:underline hover:underline-offset-4">
                   Madrasas
                 </Link>
               </li>
               <li>
-                <Link to="/waqf" className="text-sm text-slate-400 hover:text-white transition">
+                <Link to="/waqf" className="text-sm text-slate-400 transition duration-200 ease-out hover:text-white hover:-translate-y-0.5 hover:underline hover:underline-offset-4">
                   Waqf-e-Ardhi
                 </Link>
               </li>
               <li>
-                <Link to="/resources" className="text-sm text-slate-400 hover:text-white transition">
+                <Link to="/resources" className="text-sm text-slate-400 transition duration-200 ease-out hover:text-white hover:-translate-y-0.5 hover:underline hover:underline-offset-4">
                   Resources
                 </Link>
               </li>
@@ -113,28 +113,28 @@ const Footer = () => {
               <a
                 href="#"
                 aria-label="Facebook"
-                className="w-10 h-10 bg-emerald-700 hover:bg-emerald-800 rounded-lg flex items-center justify-center text-white transition"
+                className="w-10 h-10 bg-emerald-700 rounded-lg flex items-center justify-center text-white transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-emerald-800 hover:shadow-lg"
               >
                 <Globe className="h-5 w-5" />
               </a>
               <a
                 href="#"
                 aria-label="Twitter"
-                className="w-10 h-10 bg-emerald-700 hover:bg-emerald-800 rounded-lg flex items-center justify-center text-white transition"
+                className="w-10 h-10 bg-emerald-700 rounded-lg flex items-center justify-center text-white transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-emerald-800 hover:shadow-lg"
               >
                 <Mail className="h-5 w-5" />
               </a>
               <a
                 href="#"
                 aria-label="Instagram"
-                className="w-10 h-10 bg-emerald-700 hover:bg-emerald-800 rounded-lg flex items-center justify-center text-white transition"
+                className="w-10 h-10 bg-emerald-700 rounded-lg flex items-center justify-center text-white transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-emerald-800 hover:shadow-lg"
               >
                 <Phone className="h-5 w-5" />
               </a>
               <a
                 href="#"
                 aria-label="LinkedIn"
-                className="w-10 h-10 bg-emerald-700 hover:bg-emerald-800 rounded-lg flex items-center justify-center text-white transition"
+                className="w-10 h-10 bg-emerald-700 rounded-lg flex items-center justify-center text-white transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-emerald-800 hover:shadow-lg"
               >
                 <MapPin className="h-5 w-5" />
               </a>

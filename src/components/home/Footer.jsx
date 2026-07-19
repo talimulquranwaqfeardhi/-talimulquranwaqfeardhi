@@ -15,7 +15,11 @@ const Footer = () => {
           <h4 className="font-semibold text-white mb-3">Quick Links</h4>
           <ul className="space-y-3 text-sm text-slate-300">
             <li><Link to="/talim/tafsir" className="transition hover:text-white">Ta'lim Classes</Link></li>
-            <li><Link to="/ITQARegistration/student" className="transition hover:text-white">ITQA Registration</Link></li>
+            <li>
+              <a href="https://www.itqa.org.uk/" target="_blank" rel="noopener noreferrer" className="transition hover:text-white">
+                ITQA Registration
+              </a>
+            </li>
             <li><Link to="/huffaaz-db" className="transition hover:text-white">Hufaaz DB</Link></li>
             <li><Link to="/madrasatu-tahfiz" className="transition hover:text-white">Madrasatu Tahfiz</Link></li>
             <li><Link to="/waqf" className="transition hover:text-white">Waqf-e-Ardhi</Link></li>
