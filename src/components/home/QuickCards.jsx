@@ -1,71 +1,63 @@
 ﻿import { Link } from 'react-router-dom';
 import {
+  ArrowRight,
   BookOpenText,
   Languages,
   Users,
-  School,
-  Landmark,
   Library,
-  ArrowRight,
 } from 'lucide-react';
 
 const CARDS = [
   {
     icon: BookOpenText,
-    badge: 'Live & Recorded',
-    title: "Ta'lim Classes",
-    description:
-      'Join weekly online Tafsir, Tajweed, and Tarjumat al-Quran sessions taught by qualified scholars — live via Zoom or on-demand via recordings.',
-    cta: 'View Classes',
-    to: '/talim',
+    badge: 'Reading',
+    title: "Qur'an Reading",
+    description: 'Begin or improve your Qur&#39;anic reading with guided sessions and supportive teachers.',
+    cta: 'Start Reading',
+    to: '/talim/tafsir',
     accent: 'emerald',
   },
   {
     icon: Languages,
-    badge: 'Structured Curriculum',
-    title: 'Arabic Programme',
-    description:
-"Progressive Arabic language learning from beginner to advanced, designed to equip students with direct access to the Qur'an and classical texts.",
-    cta: 'Explore Arabic',
-    to: '/arabic',
+    badge: 'Recitation',
+    title: 'Tajweed',
+    description: 'Learn the rules of Tajweed to improve your Qur&#39;an recitation quality and precision.',
+    cta: 'Learn Tajweed',
+    to: '/talim/tajweed',
+    accent: 'amber',
+  },
+  {
+    icon: BookOpenText,
+    badge: 'Meaning',
+    title: 'Tarjamatul Qur’an',
+    description: 'Study translation and meaning to connect the Qur&#39;an to your daily life.',
+    cta: 'Explore Tarjamat',
+    to: '/talim/tarjumat',
+    accent: 'emerald',
+  },
+  {
+    icon: BookOpenText,
+    badge: 'Knowledge',
+    title: 'Tafsir',
+    description: 'Understand Qur&#39;anic commentary through expert explanation and structured study.',
+    cta: 'Study Tafsir',
+    to: '/talim/tafsir',
     accent: 'amber',
   },
   {
     icon: Users,
-    badge: 'Verified Records',
-    title: 'Hufaaz Directory',
-    description:
-      'A searchable, verified database of Quran memorisers across Nigeria — browse by state, gender, and level of memorisation.',
-    cta: 'Search Hufaaz',
-    to: '/huffaaz-db',
-    accent: 'emerald',
-  },
-  {
-    icon: School,
-    badge: 'Across Nigeria',
-    title: 'Madrasatu Tahfiz',
-    description:
-      'Discover registered Tahfiz schools near you — complete with contact details, capacity, and accreditation status.',
-    cta: 'Find Schools',
+    badge: 'Hifz Support',
+    title: 'Memorization',
+    description: 'Find centres and teachers supporting structured Quran memorization pathways.',
+    cta: 'View Centres',
     to: '/madrasatu-tahfiz',
-    accent: 'amber',
-  },
-  {
-    icon: Landmark,
-    badge: 'Community Endowment',
-    title: 'Waqf-e-Ardhi',
-    description:
-      'Contribute to sustainable community land endowment projects that provide lasting benefit — sadaqah jariyah for generations to come.',
-    cta: 'Support Waqf',
-    to: '/waqf',
     accent: 'emerald',
   },
   {
     icon: Library,
-    badge: 'Free Resources',
-    title: 'Resources Hub',
-    description:
-      'Access a curated library of Islamic study materials, Quranic audio, reading guides, and curriculum documents — free for all.',
+    badge: 'Study',
+    title: 'Qur&#39;anic Resources',
+    description: 'Browse curated resources for Qur&#39;an study, recitation and teacher development.',
     cta: 'Browse Resources',
     to: '/resources',
     accent: 'amber',
@@ -93,22 +85,20 @@ const accentMap = {
 
 export default function QuickCards() {
   return (
-    <section className="bg-gradient-to-br from-slate-50 via-white to-emerald-50/70 py-24" data-reveal>
+    <section className="bg-gradient-to-br from-slate-50 via-white to-emerald-50/70 py-16 sm:py-20 lg:py-24" data-reveal>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
-        <div className="mb-14 text-center">
+        <div className="mb-10 text-center sm:mb-14">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-600" />
             <span className="text-xs font-semibold uppercase tracking-widest text-emerald-700">
-              Everything in one place
+              Talimul Qur'an Learning Paths
             </span>
           </div>
           <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
-            Explore the Platform
+            Explore Qur'anic learning categories
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base text-gray-500">
-            From Qur'anic education and teacher certification to community endowment — every
-            programme offered by Nurul-Ardhi Hub is accessible from right here.
+            Discover the main Qur'an learning paths and access the right programme, centre, or teacher for your journey.
           </p>
         </div>
 

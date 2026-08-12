@@ -1,143 +1,98 @@
 import { Link } from 'react-router-dom';
-import { Sprout, Users, MapPin, ArrowRight } from 'lucide-react';
+import { ArrowRight, ClipboardList, Search, CheckCircle, Users, ShieldCheck, Repeat } from 'lucide-react';
 
-const WaqfPreview = () => {
-  const progress = 65; // 65% funded
-  const amountRaised = 325000;
-  const goalAmount = 500000;
+const STEPS = [
+  {
+    icon: ClipboardList,
+    title: 'Application',
+    description: 'Submit your availability, skills and Jama&#39;at service interest through a simple departmental request process.',
+  },
+  {
+    icon: Search,
+    title: 'Review',
+    description: 'The department reviews each request carefully to match skills with genuine Jama&#39;at work needs.',
+  },
+  {
+    icon: CheckCircle,
+    title: 'Recommendation',
+    description: 'Qualified volunteers receive a service recommendation based on the programme and community priority.',
+  },
+  {
+    icon: Users,
+    title: 'Approval / Rejection',
+    description: 'Requests are approved or declined transparently, with clear guidance for the next steps.',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Service Assignment',
+    description: 'Approved members are assigned to Jama&#39;at work that fits their time and skills.',
+  },
+  {
+    icon: Repeat,
+    title: 'Monitoring',
+    description: 'Every service placement is monitored to ensure smooth coordination and accountability.',
+  },
+  {
+    icon: ClipboardList,
+    title: 'Completion / Renewal',
+    description: 'Assignments end with review and optional renewal, preserving the temporary nature of Waqfe Ardhi service.',
+  },
+];
 
-  const formatCurrency = (amount) => {
-    return new Intl.NumberFormat('en-NG', {
-      style: 'currency',
-      currency: 'NGN',
-      maximumFractionDigits: 0,
-    }).format(amount);
-  };
-
+export default function WaqfPreview() {
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <p className="text-sm font-semibold uppercase tracking-widest text-emerald-700 mb-2">
-            Community Development
-          </p>
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-slate-900 mb-4">
-            Waqf-e-Ardhi
+    <section className="py-24 bg-slate-50" data-reveal>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-12 text-center">
+          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-emerald-700">Waqfe Ardhi</p>
+          <h2 className="mt-4 text-3xl font-extrabold text-slate-900 sm:text-4xl">
+            Temporary Jama'at service coordination — not land or property.
           </h2>
-          <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-            Support sustainable land endowment projects that will secure Qur'anic education for generations to come.
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-600">
+            Waqfe Ardhi in this platform refers to the dedication of time, skills and service to support Jama&#39;at work through an organised review and assignment process.
           </p>
         </div>
 
-        {/* Featured Project */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
-          {/* Image/Visual */}
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-emerald-200 to-blue-200 rounded-3xl blur-2xl opacity-40" />
-            <div className="relative bg-gradient-to-br from-emerald-100 to-blue-100 rounded-3xl p-12 flex items-center justify-center min-h-96">
-              <div className="text-center">
-                <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                  <Sprout className="w-12 h-12 text-emerald-700" />
-                </div>
-                <p className="text-emerald-900 font-semibold text-lg">Quranic Learning Center</p>
-                <p className="text-emerald-700 text-sm mt-2">Kano State, Nigeria</p>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {STEPS.map(({ icon: Icon, title, description }, index) => (
+            <div key={title} className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-3xl bg-emerald-100 text-emerald-700">
+                <Icon className="h-6 w-6" strokeWidth={1.75} />
               </div>
+              <div className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.25em] text-emerald-700">
+                <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-emerald-700 text-white">{index + 1}</span>
+                {title}
+              </div>
+              <p className="mt-4 text-sm leading-7 text-slate-600">{description}</p>
             </div>
-          </div>
-
-          {/* Project Details */}
-          <div>
-            <h3 className="text-3xl font-bold text-slate-900 mb-4">
-              Establishment of Regional Learning Center
-            </h3>
-            
-            <p className="text-slate-600 mb-6 leading-relaxed">
-              This Waqf project aims to establish a modern Qur'anic learning facility in Kano State. The center will serve as a hub for teacher training, student education, and community Islamic programs.
-            </p>
-
-            {/* Project Info */}
-            <div className="space-y-4 mb-8">
-              <div className="flex items-center gap-3">
-                <MapPin className="w-5 h-5 text-emerald-700 flex-shrink-0" />
-                <span className="text-slate-700">Kano State, Nigeria</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <Users className="w-5 h-5 text-emerald-700 flex-shrink-0" />
-                <span className="text-slate-700">Benefiting 500+ students and teachers</span>
-              </div>
-            </div>
-
-            {/* Progress Bar */}
-            <div className="mb-8">
-              <div className="flex justify-between items-center mb-2">
-                <p className="text-sm font-semibold text-slate-900">Funding Progress</p>
-                <p className="text-sm font-bold text-emerald-700">{progress}%</p>
-              </div>
-              <div className="w-full bg-slate-200 rounded-full h-3 overflow-hidden">
-                <div
-                  className="bg-gradient-to-r from-emerald-500 to-blue-500 h-full transition-all duration-500"
-                  style={{ width: `${progress}%` }}
-                />
-              </div>
-            </div>
-
-            {/* Amount Info */}
-            <div className="bg-slate-50 rounded-xl p-6 mb-8">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <p className="text-xs text-slate-600 uppercase font-semibold mb-1">Raised</p>
-                  <p className="text-2xl font-bold text-emerald-700">
-                    {formatCurrency(amountRaised)}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-xs text-slate-600 uppercase font-semibold mb-1">Goal</p>
-                  <p className="text-2xl font-bold text-slate-900">
-                    {formatCurrency(goalAmount)}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link
-                to="/waqf-e-ardhi/donate"
-                className="inline-flex items-center justify-center gap-2 bg-emerald-700 text-white px-8 py-3 rounded-lg font-semibold hover:bg-emerald-800 transition"
-              >
-                Donate Now
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link
-                to="/waqf-e-ardhi"
-                className="inline-flex items-center justify-center gap-2 border-2 border-emerald-700 text-emerald-700 px-8 py-3 rounded-lg font-semibold hover:bg-emerald-50 transition"
-              >
-                Learn More
-              </Link>
-            </div>
-          </div>
+          ))}
         </div>
 
-        {/* Call to Action */}
-        <div className="bg-gradient-to-r from-emerald-600 to-blue-600 rounded-2xl p-8 sm:p-12 text-center text-white">
-          <h3 className="text-2xl sm:text-3xl font-bold mb-4">
-            Make a Lasting Impact
-          </h3>
-          <p className="text-white/90 mb-8 max-w-2xl mx-auto">
-            Every contribution to Waqf-e-Ardhi creates an ongoing source of benefit for Qur'anic education.
-          </p>
-          <Link
-            to="/waqf-e-ardhi"
-            className="inline-flex items-center gap-2 bg-white text-emerald-700 px-8 py-3 rounded-lg font-semibold hover:bg-slate-100 transition"
-          >
-            Explore All Projects
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+        <div className="mt-12 rounded-3xl bg-white p-8 shadow-lg border border-slate-200">
+          <div className="grid gap-6 lg:grid-cols-3">
+            <div className="rounded-3xl bg-emerald-700 p-6 text-white shadow-sm">
+              <p className="text-sm font-semibold uppercase tracking-[0.28em] text-emerald-200">Core Commitment</p>
+              <p className="mt-4 text-lg font-semibold">Service first, not property.</p>
+            </div>
+            <div className="rounded-3xl bg-slate-50 p-6">
+              <p className="text-sm text-slate-500">Waqfe Ardhi within this platform focuses on matching volunteers with temporary Jama&#39;at service assignments.</p>
+            </div>
+            <div className="rounded-3xl bg-slate-50 p-6">
+              <p className="text-sm text-slate-500">We avoid land/property management claims and concentrate on community service, review, and renewal.</p>
+            </div>
+          </div>
+
+          <div className="mt-8 text-center">
+            <Link
+              to="/waqf"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-700 px-7 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-500/20 transition hover:bg-emerald-800"
+            >
+              Explore Waqfe Ardhi Details
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
         </div>
       </div>
     </section>
   );
-};
-
-export default WaqfPreview;
+}

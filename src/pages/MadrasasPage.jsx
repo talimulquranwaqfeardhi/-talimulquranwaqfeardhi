@@ -1,6 +1,7 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import heroImage from '@/assets/background-image.jpeg';
+import { useQuery } from '@tanstack/react-query';
+import { supabase } from '@/lib/supabaseClient';
 import {
   School,
   Search,
@@ -18,63 +19,148 @@ import {
   Phone,
   Mail,
   X,
+  BookOpen,
+  Star,
+  Award,
+  Home,
+  Calendar,
 } from 'lucide-react';
 
 /* ─── dummy data ─────────────────────────────────────────── */
 const MADRASAS_DATA = [
   {
-    id: 1, name: 'Markaz Tahfizul Qur\'an', state: 'Kano', lga: 'Kano Municipal',
-    address: '4 Zaria Road, Kano City', type: 'Boarding', status: 'Accredited',
-    capacity: 200, phone: '+234 800 100 0001', email: 'markaz.kano@talimquran.org',
+    id: 1,
+    name: 'Markaz Tahfizul Qur\'an',
+    state: 'Kano',
+    lga: 'Kano Municipal',
+    address: '4 Zaria Road, Kano City',
+    type: 'Boarding',
+    status: 'Accredited',
+    capacity: 200,
+    phone: '+234 800 100 0001',
+    email: 'markaz.kano@talimquran.org',
+    contact_name: 'Ustadh Aminu',
+    programmes: ['Full Hifz', 'Tajweed', 'Qira’at'],
   },
   {
-    id: 2, name: 'Madrasatu Nurul Huda', state: 'Lagos', lga: 'Ikeja',
-    address: '18 Awolowo Way, Ikeja', type: 'Day School', status: 'Accredited',
-    capacity: 90, phone: '+234 800 100 0002', email: 'nurulhuda.lagos@talimquran.org',
+    id: 2,
+    name: 'Madrasatu Nurul Huda',
+    state: 'Lagos',
+    lga: 'Ikeja',
+    address: '18 Awolowo Way, Ikeja',
+    type: 'Day School',
+    status: 'Accredited',
+    capacity: 90,
+    phone: '+234 800 100 0002',
+    email: 'nurulhuda.lagos@talimquran.org',
+    contact_name: 'Sheikh Musa',
+    programmes: ['Children’s Hifz', 'Adult Tajweed'],
   },
   {
-    id: 3, name: 'Jami\'atu Falah Tahfiz Centre', state: 'Kaduna', lga: 'Kaduna North',
-    address: '22 Independence Way, Kaduna', type: 'Mixed', status: 'Pending',
-    capacity: 150, phone: '+234 800 100 0003', email: 'falah.kaduna@talimquran.org',
+    id: 3,
+    name: 'Jami\'atu Falah Tahfiz Centre',
+    state: 'Kaduna',
+    lga: 'Kaduna North',
+    address: '22 Independence Way, Kaduna',
+    type: 'Mixed',
+    status: 'Pending',
+    capacity: 150,
+    phone: '+234 800 100 0003',
+    email: 'falah.kaduna@talimquran.org',
+    contact_name: 'Ustadh Hassan',
+    programmes: ['Qira’at Sab’ah', 'Tajweed'],
   },
   {
-    id: 4, name: 'Darul Uloom Tahfiz Academy', state: 'Abuja (FCT)', lga: 'Municipal Area Council',
-    address: 'National Mosque Complex, Central Area', type: 'Boarding', status: 'Accredited',
-    capacity: 180, phone: '+234 800 100 0004', email: 'darululoom.abuja@talimquran.org',
+    id: 4,
+    name: 'Darul Uloom Tahfiz Academy',
+    state: 'Abuja (FCT)',
+    lga: 'Municipal Area Council',
+    address: 'National Mosque Complex, Central Area',
+    type: 'Boarding',
+    status: 'Accredited',
+    capacity: 180,
+    phone: '+234 800 100 0004',
+    email: 'darululoom.abuja@talimquran.org',
+    contact_name: 'Ustadh Abdullahi',
+    programmes: ['Full Hifz', 'Tajweed', 'Adult Memorisation'],
   },
   {
-    id: 5, name: 'Madrasatu Ta\'alimul Qur\'an', state: 'Sokoto', lga: 'Sokoto North',
-    address: 'Sultan Abubakar Road, Sokoto', type: 'Day School', status: 'Accredited',
-    capacity: 75, phone: '+234 800 100 0005', email: 'talimulquran.sokoto@talimquran.org',
+    id: 5,
+    name: 'Madrasatu Ta\'alimul Qur\'an',
+    state: 'Sokoto',
+    lga: 'Sokoto North',
+    address: 'Sultan Abubakar Road, Sokoto',
+    type: 'Day School',
+    status: 'Accredited',
+    capacity: 75,
+    phone: '+234 800 100 0005',
+    email: 'talimulquran.sokoto@talimquran.org',
+    contact_name: 'Malam Usman',
+    programmes: ['Children’s Hifz', 'Quranic Fundamentals'],
   },
   {
-    id: 6, name: 'Al-Furqan Tahfiz Institute', state: 'Katsina', lga: 'Katsina Metropolitan',
-    address: '9 Kofar Kaura, Katsina', type: 'Boarding', status: 'Pending',
-    capacity: 120, phone: '+234 800 100 0006', email: 'furqan.katsina@talimquran.org',
+    id: 6,
+    name: 'Al-Furqan Tahfiz Institute',
+    state: 'Katsina',
+    lga: 'Katsina Metropolitan',
+    address: '9 Kofar Kaura, Katsina',
+    type: 'Boarding',
+    status: 'Pending',
+    capacity: 120,
+    phone: '+234 800 100 0006',
+    email: 'furqan.katsina@talimquran.org',
+    contact_name: 'Sheikh Suleiman',
+    programmes: ['Tajweed', 'Arabic Literacy'],
   },
   {
-    id: 7, name: 'Nurul Islam Qur\'anic School', state: 'Borno', lga: 'Maiduguri',
-    address: '11 Baga Road, Maiduguri', type: 'Mixed', status: 'Accredited',
-    capacity: 100, phone: '+234 800 100 0007', email: 'nurulislam.borno@talimquran.org',
+    id: 7,
+    name: 'Nurul Islam Qur\'anic School',
+    state: 'Borno',
+    lga: 'Maiduguri',
+    address: '11 Baga Road, Maiduguri',
+    type: 'Mixed',
+    status: 'Accredited',
+    capacity: 100,
+    phone: '+234 800 100 0007',
+    email: 'nurulislam.borno@talimquran.org',
+    contact_name: 'Malam Yusuf',
+    programmes: ['Evening Hifz', 'Tajweed'],
   },
   {
-    id: 8, name: 'Ma\'ahad Tahfizil Qur\'an', state: 'Kano', lga: 'Nassarawa',
-    address: '6 Airport Road, Kano', type: 'Day School', status: 'Accredited',
-    capacity: 60, phone: '+234 800 100 0008', email: 'maahad.kano@talimquran.org',
+    id: 8,
+    name: 'Ma\'ahad Tahfizil Qur\'an',
+    state: 'Kano',
+    lga: 'Nassarawa',
+    address: '6 Airport Road, Kano',
+    type: 'Day School',
+    status: 'Accredited',
+    capacity: 60,
+    phone: '+234 800 100 0008',
+    email: 'maahad.kano@talimquran.org',
+    contact_name: 'Ustadh Abdullahi',
+    programmes: ['Children’s Hifz', 'Basic Tajweed'],
   },
   {
-    id: 9, name: 'Zumratul Hidaya Tahfiz Centre', state: 'Lagos', lga: 'Lagos Island',
-    address: '3 Broad Street, Lagos Island', type: 'Boarding', status: 'Pending',
-    capacity: 140, phone: '+234 800 100 0009', email: 'hidaya.lagos@talimquran.org',
+    id: 9,
+    name: 'Zumratul Hidaya Tahfiz Centre',
+    state: 'Lagos',
+    lga: 'Lagos Island',
+    address: '3 Broad Street, Lagos Island',
+    type: 'Boarding',
+    status: 'Pending',
+    capacity: 140,
+    phone: '+234 800 100 0009',
+    email: 'hidaya.lagos@talimquran.org',
+    contact_name: 'Sheikh Idris',
+    programmes: ['Full Hifz', 'Qira’at', 'Female Classes'],
   },
 ];
 
-const STATES = [...new Set(MADRASAS_DATA.map((m) => m.state))].sort();
 const TYPE_OPTIONS = ['Boarding', 'Day School', 'Mixed'];
 const STATUS_OPTIONS = ['Accredited', 'Pending'];
 
 const STATS = [
-  { icon: School, value: '180+', label: 'Registered Schools', accent: 'emerald' },
+  { icon: School, value: '180+', label: 'Registered Centres', accent: 'emerald' },
   { icon: Globe, value: '28', label: 'States Covered', accent: 'amber' },
   { icon: Users, value: '12,000+', label: 'Students Enrolled', accent: 'emerald' },
   { icon: BadgeCheck, value: '140+', label: 'Accredited Schools', accent: 'amber' },
@@ -123,6 +209,30 @@ const FAQS = [
   {
     q: 'How do I contact a school directly?',
     a: 'Each listing includes a phone number and email address. Tap or click either to contact the school directly — the department does not manage individual enrolment on their behalf.',
+  },
+];
+
+// Programme cards (derived from actual programmes in dummy data)
+const PROGRAMMES = [
+  {
+    icon: BookOpen,
+    title: 'Full Hifz',
+    desc: 'Complete memorisation of the Qur’an with structured revision and teacher support.',
+  },
+  {
+    icon: Star,
+    title: 'Tajweed & Qira’at',
+    desc: 'Mastery of pronunciation, recitation rules, and the ten authentic Qira’at.',
+  },
+  {
+    icon: Award,
+    title: 'Children’s Hifz',
+    desc: 'Specialised programmes for young memorisers with age‑appropriate methods.',
+  },
+  {
+    icon: Calendar,
+    title: 'Evening & Adult Classes',
+    desc: 'Flexible schedules for working adults and part‑time students.',
   },
 ];
 
@@ -191,9 +301,9 @@ function EmptyState({ onReset }) {
       <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gray-100">
         <Search className="h-7 w-7 text-gray-400" />
       </div>
-      <h3 className="text-lg font-extrabold text-gray-900">No Schools Found</h3>
+      <h3 className="text-lg font-extrabold text-gray-900">No Centres Found</h3>
       <p className="mt-2 max-w-sm text-sm text-gray-500">
-        No schools match your current search and filters. Try adjusting your criteria or reset to browse the full directory.
+        No centres match your current search and filters. Try adjusting your criteria or reset to browse the full directory.
       </p>
       <button
         onClick={onReset}
@@ -203,6 +313,53 @@ function EmptyState({ onReset }) {
       </button>
     </div>
   );
+}
+
+function LoadingState() {
+  return (
+    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {Array.from({ length: 3 }).map((_, index) => (
+        <div key={index} className="animate-pulse overflow-hidden rounded-2xl border border-gray-100 bg-white p-6">
+          <div className="mb-4 h-4 w-32 rounded-full bg-gray-200" />
+          <div className="mb-4 h-3 w-20 rounded-full bg-gray-200" />
+          <div className="mb-6 h-3 w-full rounded-full bg-gray-200" />
+          <div className="grid gap-3">
+            <div className="h-3 w-full rounded-full bg-gray-200" />
+            <div className="h-3 w-4/5 rounded-full bg-gray-200" />
+            <div className="h-3 w-3/4 rounded-full bg-gray-200" />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function ErrorState({ message, onRetry }) {
+  return (
+    <div className="rounded-2xl border border-red-100 bg-red-50 px-6 py-5 text-sm text-red-700">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <p>
+          Unable to load the live directory. Showing sample listings instead.
+          {message ? ` (${message})` : ''}
+        </p>
+        <button
+          onClick={onRetry}
+          className="inline-flex items-center rounded-xl border border-red-200 bg-white px-4 py-2 text-sm font-semibold text-red-700 transition-colors duration-200 hover:bg-red-100"
+        >
+          Retry
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function normalizeProgrammes(programmes) {
+  if (!programmes) return [];
+  if (Array.isArray(programmes)) return programmes;
+  return String(programmes)
+    .split(',')
+    .map((item) => item.trim())
+    .filter(Boolean);
 }
 
 /* ─── page ───────────────────────────────────────────────── */
@@ -217,13 +374,83 @@ export default function MadrasasPage() {
     name: '', state: '', lga: '', type: '', status: '',
   });
 
+  // Scroll reveal animation
+  const sectionRefs = useRef([]);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    );
+    const currentRefs = sectionRefs.current;
+    currentRefs.forEach((el) => el && observer.observe(el));
+    return () => {
+      currentRefs.forEach((el) => el && observer.unobserve(el));
+    };
+  }, []);
+
+  const BACKEND_TABLE = import.meta.env.VITE_SUPABASE_MADRASAS_TABLE || 'madrasas';
+  const hasBackend = Boolean(import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_ANON_KEY);
+
+  const {
+  data: backendData,
+  error,
+  isLoading,
+  refetch,
+} = useQuery({
+  queryKey: ['madrasas-directory'],
+
+  queryFn: async () => {
+    if (!supabase) {
+      throw new Error('Supabase client not initialized');
+    }
+
+    const { data, error: queryError } = await supabase
+      .from(BACKEND_TABLE)
+      .select('*');
+
+    if (queryError) {
+      throw queryError;
+    }
+
+    return data;
+  },
+
+  enabled: hasBackend && !!supabase,
+  retry: false,
+});
+
+  const directoryData = useMemo(() => {
+    if (!hasBackend || isLoading || error) {
+      return MADRASAS_DATA;
+    }
+    return backendData ?? [];
+  }, [backendData, error, hasBackend, isLoading]);
+
   const availableLgas = useMemo(() => {
-    const source = draftState ? MADRASAS_DATA.filter((m) => m.state === draftState) : MADRASAS_DATA;
+    const source = draftState ? directoryData.filter((m) => m.state === draftState) : directoryData;
     return [...new Set(source.map((m) => m.lga))].sort();
-  }, [draftState]);
+  }, [draftState, directoryData]);
+
+  const stateOptions = useMemo(() => {
+    return [...new Set(directoryData.map((m) => m.state || ''))].filter(Boolean).sort();
+  }, [directoryData]);
+
+  const typeOptions = useMemo(() => {
+    return [...new Set([...TYPE_OPTIONS, ...directoryData.map((m) => m.type || '')])].filter(Boolean).sort();
+  }, [directoryData]);
+
+  const statusOptions = useMemo(() => {
+    return [...new Set([...STATUS_OPTIONS, ...directoryData.map((m) => m.status || '')])].filter(Boolean).sort();
+  }, [directoryData]);
 
   const filteredSchools = useMemo(() => {
-    return MADRASAS_DATA.filter((m) => {
+    return directoryData.filter((m) => {
       const matchName = !appliedFilters.name || m.name.toLowerCase().includes(appliedFilters.name.toLowerCase());
       const matchState = !appliedFilters.state || m.state === appliedFilters.state;
       const matchLga = !appliedFilters.lga || m.lga === appliedFilters.lga;
@@ -231,9 +458,10 @@ export default function MadrasasPage() {
       const matchStatus = !appliedFilters.status || m.status === appliedFilters.status;
       return matchName && matchState && matchLga && matchType && matchStatus;
     });
-  }, [appliedFilters]);
+  }, [appliedFilters, directoryData]);
 
   const hasAppliedFilters = Object.values(appliedFilters).some(Boolean);
+  const showFallbackNote = hasBackend && (isLoading || error);
 
   function handleSearch(e) {
     e.preventDefault();
@@ -257,61 +485,59 @@ export default function MadrasasPage() {
   return (
     <div className="bg-white">
 
-      {/* ══════════════════ HERO BANNER ══════════════════ */}
-      <section
-        className="relative overflow-hidden bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroImage})` }}
-      >
-        <div className="absolute inset-0 bg-black/65"></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-950/85 via-emerald-900/60 to-emerald-800/35" />
+      {/* ══════════════════ HERO ══════════════════ */}
+      <section className="relative overflow-hidden bg-emerald-900">
+        {/* Decorative pattern overlay */}
+        <div className="absolute inset-0 opacity-10" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundSize: '60px 60px',
+        }} />
+        <div className="absolute inset-0 bg-gradient-to-br from-emerald-950/80 via-emerald-900/70 to-emerald-800/60" />
 
-        <div className="pointer-events-none absolute -right-40 -top-40 h-[520px] w-[520px] rounded-full border border-white/[0.04]" />
-        <div className="pointer-events-none absolute -right-20 -top-20 h-[360px] w-[360px] rounded-full border border-white/[0.04]" />
-        <div className="pointer-events-none absolute left-1/3 top-0 h-72 w-72 -translate-y-1/3 rounded-full bg-amber-500/10 blur-3xl" />
-        <span className="pointer-events-none absolute inset-0 flex items-center justify-end pr-8 text-[18rem] font-black leading-none text-white/[0.025] select-none">
-          م
-        </span>
-
-        <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
-          <div className="mb-6 flex items-center gap-2 text-xs font-medium text-emerald-300">
-            <Link to="/" className="transition-colors hover:text-amber-300"></Link>
-            <span className="text-emerald-600"></span>
-            <span className="text-white"></span>
-          </div>
-
-          <div className="max-w-2xl">
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-amber-400/25 bg-amber-400/10 px-4 py-1.5">
-              <ShieldCheck className="h-3.5 w-3.5 text-amber-300" />
-              <span className="text-xs font-semibold uppercase tracking-widest text-amber-300">
-                National School Directory
-              </span>
+        <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8 lg:py-32">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-12">
+            <div className="max-w-2xl">
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-400/10 px-4 py-1.5">
+                <ShieldCheck className="h-3.5 w-3.5 text-amber-300" />
+                <span className="text-xs font-semibold uppercase tracking-widest text-amber-300">
+                  National Madrasatu Tahfiz Directory
+                </span>
+              </div>
+              <h1 className="text-4xl font-extrabold leading-[1.1] text-white sm:text-5xl lg:text-[3.5rem]">
+                Qur’an Centre <br className="hidden sm:block" />
+                <span className="text-amber-300">Directory</span>
+              </h1>
+              <p className="mt-6 max-w-xl text-base leading-relaxed text-emerald-100/90 sm:text-lg">
+                A searchable directory of registered Qur’an centres across Nigeria — complete
+                with location, programmes, and accreditation status, so families and educators
+                can connect with confidence.
+              </p>
+              <div className="mt-9 flex flex-wrap gap-3">
+                <a
+                  href="#search"
+                  className="group inline-flex items-center gap-2 rounded-xl bg-amber-400 px-7 py-3.5 text-sm font-bold text-emerald-950 shadow-lg shadow-amber-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-amber-300 hover:shadow-xl hover:shadow-amber-400/30"
+                >
+                  Search Centres
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                </a>
+                <a
+                  href="#list"
+                  className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-white/35 hover:bg-white/[0.18]"
+                >
+                  <School className="h-4 w-4" />
+                  List Your Centre
+                </a>
+              </div>
             </div>
 
-            <h1 className="text-4xl font-extrabold leading-[1.1] text-white sm:text-5xl lg:text-[3.25rem]">
-              Madrasatu Tahfiz Directory
-            </h1>
-
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-emerald-200/90 sm:text-lg">
-              A searchable directory of registered Tahfiz schools across Nigeria — complete
-              with location, capacity, and accreditation status, so you can find the right
-              school with confidence.
-            </p>
-
-            <div className="mt-9 flex flex-wrap gap-3">
-              <a
-                href="#search"
-                className="group inline-flex items-center gap-2 rounded-xl bg-amber-400 px-7 py-3.5 text-sm font-bold text-emerald-950 shadow-lg shadow-amber-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-amber-300 hover:shadow-xl hover:shadow-amber-400/30"
-              >
-                Search Schools
-                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </a>
-              <a
-                href="#list"
-                className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-white/35 hover:bg-white/[0.18]"
-              >
-                <School className="h-4 w-4" />
-                List Your School
-              </a>
+            {/* Decorative motif */}
+            <div className="hidden lg:block relative w-72 h-72">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-64 h-64 rounded-full border-4 border-amber-400/20 animate-pulse" />
+                <div className="absolute w-48 h-48 rounded-full border-4 border-emerald-400/20 animate-pulse delay-75" />
+                <div className="absolute w-32 h-32 rounded-full border-4 border-amber-300/30 animate-pulse delay-150" />
+                <span className="absolute text-8xl font-arabic text-white/10 select-none">م</span>
+              </div>
             </div>
           </div>
         </div>
@@ -341,6 +567,105 @@ export default function MadrasasPage() {
         </div>
       </section>
 
+      {/* ══════════════════ INTRODUCTION ══════════════════ */}
+      <section
+        ref={(el) => (sectionRefs.current[0] = el)}
+        className="bg-gray-50/50 py-24"
+        data-reveal
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
+            <div>
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5">
+                <Sparkles className="h-3.5 w-3.5 text-emerald-600" />
+                <span className="text-[11px] font-bold uppercase tracking-widest text-emerald-700">
+                  About Madrasatu Tahfiz
+                </span>
+              </div>
+              <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                Preserving the Qur’an <br className="hidden sm:block" />
+                <span className="text-emerald-700">Through Education</span>
+              </h2>
+              <p className="mt-6 text-base leading-relaxed text-gray-600">
+                The <span className="font-semibold text-gray-900">Madrasatu Tahfiz</span> initiative
+                is a national effort to organise, support, and promote Qur’an memorisation centres
+                across Nigeria. By connecting families with accredited institutions, we ensure
+                that every student receives authentic, structured, and high‑quality Tahfiz education.
+              </p>
+              <p className="mt-4 text-base leading-relaxed text-gray-600">
+                Our directory lists both accredited and pending schools, giving you full visibility
+                into each centre’s status, programmes, and contact details.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-4">
+                <div className="flex items-center gap-2">
+                  <BadgeCheck className="h-5 w-5 text-emerald-700" />
+                  <span className="text-sm font-medium text-gray-700">Verified listings</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Users className="h-5 w-5 text-emerald-700" />
+                  <span className="text-sm font-medium text-gray-700">Thousands of students</span>
+                </div>
+              </div>
+            </div>
+            <div className="relative">
+              <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-emerald-100 to-emerald-200 p-1 shadow-xl">
+                <div className="w-full h-full rounded-xl bg-white flex items-center justify-center p-8 text-center">
+                  <div>
+                    <Building2 className="h-20 w-20 text-emerald-700/30 mx-auto mb-4" />
+                    <h3 className="text-xl font-bold text-emerald-800">Growing Together</h3>
+                    <p className="text-sm text-gray-600 mt-2">
+                      Over 180 centres and counting – join the movement to preserve the Qur’an.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              {/* decorative dots */}
+              <div className="absolute -bottom-4 -right-4 h-24 w-24 rounded-full border-2 border-emerald-200/50" />
+              <div className="absolute -top-4 -left-4 h-16 w-16 rounded-full border-2 border-amber-200/50" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════ PROGRAMMES ══════════════════ */}
+      <section
+        ref={(el) => (sectionRefs.current[1] = el)}
+        className="py-24"
+        data-reveal
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-14 text-center">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5">
+              <BookOpen className="h-3.5 w-3.5 text-emerald-600" />
+              <span className="text-[11px] font-bold uppercase tracking-widest text-emerald-700">
+                Learning Programmes
+              </span>
+            </div>
+            <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+              What We Offer
+            </h2>
+            <p className="mx-auto mt-3 max-w-lg text-sm text-gray-500">
+              Our registered centres provide a range of programmes tailored to different age groups and goals.
+            </p>
+          </div>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {PROGRAMMES.map(({ icon: Icon, title, desc }, i) => (
+              <div
+                key={title}
+                className="group rounded-2xl border border-gray-100 bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-emerald-200 hover:shadow-lg"
+                style={{ transitionDelay: `${i * 0.05}s` }}
+              >
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-50 transition-transform duration-300 group-hover:scale-110">
+                  <Icon className="h-6 w-6 text-emerald-700" strokeWidth={2} />
+                </div>
+                <h3 className="mb-2 text-base font-extrabold text-gray-900">{title}</h3>
+                <p className="text-sm leading-relaxed text-gray-500">{desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ══════════════════ SEARCH & FILTERS ══════════════════ */}
       <section id="search" className="bg-gray-50/70 py-24">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
@@ -352,10 +677,10 @@ export default function MadrasasPage() {
               </span>
             </div>
             <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-              Find a School
+              Find a Centre
             </h2>
             <p className="mx-auto mt-3 max-w-lg text-sm text-gray-500">
-              Search the directory by name, or narrow results using the filters below.
+              Search the directory by centre name, location, or accreditation details.
             </p>
           </div>
 
@@ -372,7 +697,7 @@ export default function MadrasasPage() {
                   type="text"
                   value={draftName}
                   onChange={(e) => setDraftName(e.target.value)}
-                  placeholder="Search by school name…"
+                  placeholder="Search by centre name…"
                   className={`${inputClass} pl-11`}
                 />
               </div>
@@ -381,7 +706,7 @@ export default function MadrasasPage() {
                 <FilterField label="State">
                   <select value={draftState} onChange={handleStateChange} className={inputClass}>
                     <option value="">All States</option>
-                    {STATES.map((s) => <option key={s} value={s}>{s}</option>)}
+                    {stateOptions.map((s) => <option key={s} value={s}>{s}</option>)}
                   </select>
                 </FilterField>
 
@@ -392,17 +717,17 @@ export default function MadrasasPage() {
                   </select>
                 </FilterField>
 
-                <FilterField label="School Type">
+                <FilterField label="Centre Type">
                   <select value={draftType} onChange={(e) => setDraftType(e.target.value)} className={inputClass}>
                     <option value="">All Types</option>
-                    {TYPE_OPTIONS.map((t) => <option key={t} value={t}>{t}</option>)}
+                    {typeOptions.map((t) => <option key={t} value={t}>{t}</option>)}
                   </select>
                 </FilterField>
 
                 <FilterField label="Accreditation">
                   <select value={draftStatus} onChange={(e) => setDraftStatus(e.target.value)} className={inputClass}>
                     <option value="">Any Status</option>
-                    {STATUS_OPTIONS.map((s) => <option key={s} value={s}>{s}</option>)}
+                    {statusOptions.map((s) => <option key={s} value={s}>{s}</option>)}
                   </select>
                 </FilterField>
               </div>
@@ -421,7 +746,7 @@ export default function MadrasasPage() {
                   className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-700 px-6 py-2.5 text-sm font-bold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-emerald-800 hover:shadow-md"
                 >
                   <Search className="h-4 w-4" />
-                  Search Schools
+                  Search Centres
                 </button>
               </div>
             </div>
@@ -447,11 +772,11 @@ export default function MadrasasPage() {
           <div className="mb-8 flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
             <p className="text-sm text-gray-500">
               {filteredSchools.length === 0 ? (
-                'No schools match your search.'
+                'No centres match your search.'
               ) : (
                 <>
                   Showing <span className="font-bold text-gray-900">{filteredSchools.length}</span>{' '}
-                  {filteredSchools.length === 1 ? 'school' : 'schools'}
+                  {filteredSchools.length === 1 ? 'centre' : 'centres'}
                   {appliedFilters.state ? ` in ${appliedFilters.state}` : ''}
                 </>
               )}
@@ -463,12 +788,22 @@ export default function MadrasasPage() {
             )}
           </div>
 
-          {filteredSchools.length === 0 ? (
+          {showFallbackNote && error && (
+            <div className="mb-8">
+              <ErrorState message={error.message} onRetry={() => refetch()} />
+            </div>
+          )}
+
+          {isLoading ? (
+            <LoadingState />
+          ) : filteredSchools.length === 0 ? (
             <EmptyState onReset={handleReset} />
           ) : (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {filteredSchools.map((m, i) => {
                 const avatarClass = i % 2 === 0 ? 'bg-emerald-700 text-white' : 'bg-amber-400 text-emerald-950';
+                const programmes = normalizeProgrammes(m.programmes);
+
                 return (
                   <div
                     key={m.id}
@@ -492,16 +827,35 @@ export default function MadrasasPage() {
 
                       <div className="my-4 h-px w-full bg-gray-100" />
 
-                      <div className="space-y-2.5">
-                        <div className="flex items-center gap-2 text-xs text-gray-600">
+                      <div className="space-y-2.5 text-xs text-gray-600">
+                        <div className="flex items-center gap-2">
                           <Layers className="h-3.5 w-3.5 shrink-0 text-emerald-600" />
                           {m.type}
                         </div>
-                        <div className="flex items-center gap-2 text-xs text-gray-600">
+                        <div className="flex items-center gap-2">
                           <Users className="h-3.5 w-3.5 shrink-0 text-emerald-600" />
                           Capacity: <span className="font-semibold text-gray-700">{m.capacity}</span> students
                         </div>
+                        {m.contact_name && (
+                          <div className="flex items-center gap-2">
+                            <BadgeCheck className="h-3.5 w-3.5 shrink-0 text-emerald-600" />
+                            Contact: <span className="font-semibold text-gray-700">{m.contact_name}</span>
+                          </div>
+                        )}
                       </div>
+
+                      {programmes.length > 0 && (
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          {programmes.map((programme) => (
+                            <span
+                              key={programme}
+                              className="rounded-full bg-emerald-50 px-2.5 py-1 text-[11px] font-semibold text-emerald-700"
+                            >
+                              {programme}
+                            </span>
+                          ))}
+                        </div>
+                      )}
 
                       <div className="mt-4 space-y-2 border-t border-gray-100 pt-4">
                         <a
@@ -537,7 +891,11 @@ export default function MadrasasPage() {
       </section>
 
       {/* ══════════════════ WHY USE THE DIRECTORY ══════════════════ */}
-      <section className="bg-gray-50/70 py-24">
+      <section
+        ref={(el) => (sectionRefs.current[2] = el)}
+        className="bg-gray-50/70 py-24"
+        data-reveal
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-14 flex flex-col items-center text-center">
             <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5">

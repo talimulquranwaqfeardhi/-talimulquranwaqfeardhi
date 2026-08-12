@@ -33,10 +33,10 @@ const schools = [
 
 const MadrasatuTahfizPreview = () => {
   return (
-    <section className="py-20 bg-slate-50">
+    <section className="bg-slate-50 py-16 sm:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
+        <div className="mb-10 flex flex-col gap-6 md:mb-16 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="text-sm font-semibold uppercase tracking-widest text-emerald-700 mb-2">
               Network Directory

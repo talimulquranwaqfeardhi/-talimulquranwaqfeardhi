@@ -10,10 +10,10 @@ const TALIM_ITEMS = [
 ];
 
 const SIMPLE_LINKS = [
-  { label: 'Hufaaz DB',        to: '/huffaaz-db'        },
+  { label: 'Hufaaz DB', to: '/huffaaz-db' },
   { label: 'Madrasatu Tahfiz', to: '/madrasatu-tahfiz' },
-  { label: 'Waqf-e-Ardhi',    to: '/waqf'             },
-  { label: 'Resources',        to: '/resources'         },
+  { label: 'Waqf-e-Ardhi', to: '/waqf' },
+  { label: 'Resources', to: '/resources' },
 ];
 
 function DropdownMenu({ label, items }) {

@@ -1,40 +1,41 @@
 ﻿import { Link } from 'react-router-dom';
 import { ArrowRight, BookOpenText, GraduationCap, Landmark, MapPin } from 'lucide-react';
+import heroImage from '@/assets/background-image.jpeg';
 
 const ITQA_URL = 'https://www.itqa.org.uk/';
 
 const STATS = [
   { value: '500+', label: 'Certified Teachers' },
-  { value: '120+', label: 'Tahfiz Schools' },
-  { value: '10K+', label: 'Students Enrolled' },
+  { value: '120+', label: 'Learning Centres' },
+  { value: '10K+', label: 'Learners Supported' },
 ];
 
 const CARDS = [
   {
     icon: GraduationCap,
-    title: 'ITQA Accreditation',
-    desc: 'Register as a certified teacher or student through our streamlined accreditation process.',
+    title: 'Teacher Accreditation',
+    desc: 'Connect with certified Qur&#39;an instructors and teachers across the country.',
     cta: 'Register Now',
     to: ITQA_URL,
   },
   {
     icon: BookOpenText,
     title: "Ta'lim Classes",
-    desc: 'Join Tafsir, Tajweed, and Tarjumat classes with experienced instructors across Nigeria.',
+    desc: 'Find live and recorded Qur&#39;an classes in Tafsir, Tajweed and Tarjamat.',
     cta: 'Find Classes',
     to: '/talim/tafsir',
   },
   {
     icon: MapPin,
-    title: 'Tahfiz Schools',
-    desc: 'Explore our directory of Tahfiz schools with interactive maps and detailed profiles.',
-    cta: 'View Schools',
+    title: 'Learning Centres',
+    desc: 'Browse Qur&#39;an centres and student support hubs across our network.',
+    cta: 'View Centres',
     to: '/madrasatu-tahfiz',
   },
   {
     icon: Landmark,
-    title: 'Waqf-e-Ardhi',
-    desc: 'Contribute to land endowment for the establishment of Islamic educational institutions.',
+    title: 'Waqfe Ardhi',
+    desc: 'Discover how members can dedicate their time and skills in Jama&#39;at service.',
     cta: 'Learn More',
     to: '/waqf',
   },
@@ -70,13 +71,12 @@ export default function Hero() {
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=1800&q=80')",
+            backgroundImage: `url(${heroImage})`,
           }}
         />
 
-        <div className="absolute inset-0 bg-emerald-950/80" />
-        <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/90 via-emerald-950/70 to-emerald-950/30" />
+        <div className="absolute inset-0 bg-emerald-950/85" />
+        <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/95 via-emerald-950/70 to-emerald-950/20" />
         <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/80 via-transparent to-transparent" />
         <div aria-hidden="true" className="pointer-events-none absolute -left-16 top-20 hidden sm:block h-72 w-72 sm:h-96 sm:w-96 rounded-full hero-spotlight opacity-75" />
 
@@ -85,7 +85,7 @@ export default function Hero() {
         <div aria-hidden="true" className="pointer-events-none absolute -right-8 -top-8 hidden md:block h-[160px] w-[160px] lg:h-[240px] lg:w-[240px] rounded-full border border-white/5" />
         <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-0 h-80 w-80 -translate-x-1/2 rounded-full bg-amber-500/12 blur-3xl" />
 
-        <div className="relative mx-auto max-w-3xl px-6 py-28 lg:px-8 lg:py-40" data-reveal>
+        <div className="relative mx-auto max-w-3xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-40" data-reveal>
           <div className="max-w-2xl">
             <div className="mb-8 flex items-center gap-3 fade-item" style={{ animationDelay: '100ms' }}>
               <span className="h-px w-10 bg-amber-300/80" />
@@ -95,39 +95,38 @@ export default function Hero() {
             </div>
 
             <h1 className="text-5xl font-semibold tracking-tight text-white sm:text-6xl lg:text-[4rem] fade-item" style={{ animationDelay: '180ms' }}>
-              Advancing Qur'anic
+              Learn the Qur'an.
               <br className="hidden sm:block" />
-              Education in Nigeria
+              Serve the Jama'at.
             </h1>
 
             <p className="mt-6 max-w-xl text-base leading-8 text-slate-200 sm:text-lg fade-item" style={{ animationDelay: '260ms' }}>
-              Empowering communities through Qur'anic literacy, teacher accreditation, and sustainable land endowment programmes.
+              Connecting learners with Qur'anic learning opportunities, centres and teachers while enabling members to dedicate their time, skills and service for Jama'at work.
             </p>
 
             <div className="mt-12 flex flex-col gap-3 sm:flex-row sm:items-center fade-item" style={{ animationDelay: '340ms' }}>
-              <a
-                href={ITQA_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-full bg-amber-400 px-7 py-3.5 text-sm font-semibold text-slate-950 shadow-button shadow-amber-500/20 transition duration-200 hover:-translate-y-0.5 hover:bg-amber-300 hover:shadow-card focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300"
-              >
-                Join ITQA
-              </a>
               <Link
                 to="/talim/tafsir"
-                className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/12 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur-sm shadow-button transition duration-200 hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/[0.18] hover:shadow-card focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-300"
+                className="inline-flex items-center justify-center rounded-full bg-amber-400 px-7 py-3.5 text-sm font-semibold text-slate-950 shadow-button shadow-amber-500/20 transition duration-200 hover:-translate-y-0.5 hover:bg-amber-300 hover:shadow-card focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300"
               >
-                Find a Ta'lim Class
+                Explore Qur'anic Learning
               </Link>
               <Link
                 to="/waqf"
                 className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/12 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur-sm shadow-button transition duration-200 hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/[0.18] hover:shadow-card focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-300"
               >
-                Waqf-e-Ardhi Info
+                Explore Waqfe Ardhi
               </Link>
             </div>
 
-            <div className="mt-16 grid gap-4 border-t border-white/10 pt-10 sm:grid-cols-3 fade-item" style={{ animationDelay: '420ms' }}>
+            <div className="mt-10 text-sm text-slate-300 fade-item" style={{ animationDelay: '360ms' }}>
+              <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-emerald-100">
+                <GraduationCap className="h-4 w-4" />
+                Verified Qur'anic instructors and learning centres
+              </span>
+            </div>
+
+            <div className="mt-10 grid gap-4 border-t border-white/10 pt-8 sm:mt-12 sm:grid-cols-3 sm:pt-10 fade-item" style={{ animationDelay: '420ms' }}>
               {STATS.map(({ value, label }) => (
                 <div key={label} className="group relative overflow-hidden rounded-3xl bg-white/8 p-5 text-white/95 shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:shadow-elevated hover:shadow-emerald-500/20">
                   <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-white/20 to-transparent opacity-70" />
@@ -145,7 +144,7 @@ export default function Hero() {
       </section>
 
       <section className="relative z-10 bg-white" data-reveal>
-        <div className="mx-auto max-w-7xl px-6 py-10 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
           <div className="-mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {CARDS.map(({ icon: Icon, title, desc, cta, to }) => (
               <LinkWrapper
@@ -166,7 +165,7 @@ export default function Hero() {
             ))}
           </div>
         </div>
-        <div className="h-20" />
+        <div className="h-8 sm:h-12 lg:h-20" />
       </section>
     </>
   );
