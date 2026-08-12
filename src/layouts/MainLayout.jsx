@@ -1,5 +1,5 @@
 ﻿import { Outlet, useLocation } from 'react-router-dom';
-import Navbar from '@/components/layout/Navbar';
+import Navbar from '@/components/layout/navbar';
 import Footer from '@/components/layout/Footer';
 import ScrollToTop from '@/components/layout/ScrollToTop';
 import useRevealOnScroll from '@/hooks/useRevealOnScroll';
